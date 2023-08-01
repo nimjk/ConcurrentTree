@@ -4,7 +4,6 @@
 #include <mutex>
 
 
-
 const int ARRAY_SIZE = 10;
 std::vector<int> concurrentArray(ARRAY_SIZE); // concurrentArray는 동시 접근 가능한 배열입니다.
 std::mutex arrayMutex; // 배열에 접근하기 위한 mutex
