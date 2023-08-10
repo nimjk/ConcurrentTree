@@ -3,11 +3,11 @@
 using namespace std;
 
 template <typename T>
-class Node { // 노드 클래스 정의
+class Node { 
 public:
-	T data; // data의 값과
-	Node* next; //다음 부분을 가르키는 주소를 멤버변수로 정의
-	Node* prev; //전 부분을 가르키는 주소를 멤버변수로 정의
+	T data; 
+	Node* next; 
+	Node* prev;
 
 	template <typename T>
 	Node(const T& value) : data(value), next(nullptr), prev(nullptr) {}
@@ -16,21 +16,21 @@ public:
 
 
 template <typename T>
-class list_bh { //병현_리스트 제작
+class dlist { 
 private:
-	Node<T>* head; // 노드의 주소를 각각 head tail라고 정의.
+	Node<T>* head; 
 	Node<T>* tail;
-	size_t count; // List의 크기를 정하기 위한 count 정의
+	size_t count; 
 public:
 
-	list_bh() : head(nullptr), tail(nullptr), count(0) {} //기본 생성자
+	dlist() : head(nullptr), tail(nullptr), count(0) {} 
 
-	list_bh(const list_bh& other) : head(nullptr), tail(nullptr), count(0)
-	{				//복사 생성자. "깊은 복사"를 위한 & 사용
+	dlist(const dlist& other) : head(nullptr), tail(nullptr), count(0)
+	{				
 		Node<T>* cur = other.head;
 		while (cur != nullptr)
 		{
-			push_back(cur->data); // push_back은 따로 멤버함수로 정리할것
+			push_back(cur->data); 
 			cur = cur->next;
 		}
 	}
@@ -39,17 +39,17 @@ public:
 
 	void push_back(const T& value)
 	{
-		Node<T>* newNode = new Node<T>(value); // 새로운 노드 포인트 지정
-		if (head == nullptr) // 만약 포인터가 0개라면
+		Node<T>* newNode = new Node<T>(value); 
+		if (head == nullptr) 
 		{
-			head = newNode; // 새로운 포인터 지정. head와 tail이 둘다 newNode를 가리킴
+			head = newNode; 
 			tail = newNode;
 		}
 		else
 		{
-			tail->next = newNode; // 포인터가 있었다면 next를 newNode로 지정 (즉 head는 새로운 노드의 point)
-			newNode->prev = tail; // 새 노드의 prev값은 tail의 주소(전 노드 point)를 가리킴.
-			tail = newNode; // 꼬리도 newNode로 갱신시킴
+			tail->next = newNode; 
+			newNode->prev = tail;
+			tail = newNode;
 		}
 		count++;
 	}
@@ -73,17 +73,17 @@ public:
 	}
 
 	void pop_back() {
-		if (tail == nullptr) return; // 리스트가 비어있으면 아무것도 리턴하지 않고 빠져나감
+		if (tail == nullptr) return; 
 
-		if (head == tail) {    //리스트에 하나의 노드만 존재하는 경우.
+		if (head == tail) {  
 			delete tail;
 			head = tail = nullptr;
 		}
 		else {
-			Node<T>* prevNode = tail->prev; // 리스트에 2개 이상의 노드 존재. tail의 값을 prevNode로 지정
-			prevNode->next = nullptr; // prevNode의 next를 없앰
-			delete tail; // 할일을 잃은 원래의 꼬리는 삭제
-			tail = prevNode; //  새롭게 지정된 꼬리 (next가 null tail이 prevNode)로 tail 지정
+			Node<T>* prevNode = tail->prev; 
+			prevNode->next = nullptr; 
+			delete tail; 
+			tail = prevNode; 
 		}
 		count--;
 	}
@@ -109,28 +109,17 @@ public:
 
 	void print_list() const {
 
-		Node<T>* cur = head;	 //노드 포인트 하나를 head로 만듬
-		while (cur != nullptr) {	// 헤드가 nullptr가 아니면
-			cout << cur->data << " "; // 현재의 data 값들을 출력
-			cur = cur->next;  // 다음 노드로 옮김
+		Node<T>* cur = head;	
+		while (cur != nullptr) {	
+			cout << cur->data << " "; 
+			cur = cur->next; 
 		}
-		cout << endl;   // 추후 hpp와 cpp파일을 분리할 때 std::cout / std::endl에 대해 알아볼것.
+		cout << endl;  
 	}
 
 	void get_size() const {
-		cout << count; // 함수마다 count되던 값을 출력함 
+		cout << count;
 	}
-
-
-	Node<T>* begin() { // 리스트의 첫 부분을 포인터로 반환하는 함수. auto iterator로 지정가능
-		return head;
-	}
-
-
-	Node<T>* end() { //리스트의 끝부분 반환함수
-		return nullptr;
-	}
-
 
 };
 
@@ -138,7 +127,7 @@ public:
 
 int main(void)
 {
-	list_bh <int> lis;
+	dlist <int> lis;
 	lis.push_back(2);
 	lis.push_back(2);
 	lis.push_front(3);
@@ -150,14 +139,6 @@ int main(void)
 
 	lis.print_list();
 	lis.get_size();
-
-	cout << endl;
-
-
-	auto it = lis.begin();
-	for (auto i = it; i != lis.end(); i++)
-		i->data += 1;
-	lis.print_list();  //여기는 동작을 안하는 이유를 잘 모르겠음
 
 
 

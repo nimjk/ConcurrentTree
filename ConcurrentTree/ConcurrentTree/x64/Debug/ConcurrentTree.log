@@ -1,2 +1,76 @@
-﻿  230802_concurrentdlltest2.cpp
-  ConcurrentTree.vcxproj -> C:\source\repos\concurrentTree\ConcurrentTree\ConcurrentTree\x64\Debug\ConcurrentTree.exe
+﻿  230810_concurrenttest.cpp
+C:\source\repos\concurrentTree\ConcurrentTree\ConcurrentTree\ConcurrentTree\230810_concurrenttest.cpp(1,1): warning C4828: 파일에 0x8e2 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 949).
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\xmemory(677,47): error C2440: '초기화 중': 'initializer list'에서 '_Objty'(으)로 변환할 수 없습니다.
+          with
+          [
+              _Objty=int
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\xmemory(677,47): message : 이니셜라이저에 요소가 너무 많습니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\list(586,25): message : 컴파일되는 함수 템플릿 인스턴스화 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,int&,int&>(_Alloc &,_Objty *const ,int &,int &)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Alloc=std::allocator<std::_List_node<int,std::_Default_allocator_traits<std::allocator<int>>::void_pointer>>,
+              _Ty=int,
+              _Objty=int
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\list(1016,44): message : 컴파일되는 함수 템플릿 인스턴스화 'std::_List_node_emplace_op2<std::allocator<std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer>>>::_List_node_emplace_op2<int&,int&>(_Alnode &,int &,int &)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=int,
+              _Alloc=std::allocator<int>,
+              _Alnode=std::allocator<std::_List_node<int,std::_Default_allocator_traits<std::allocator<int>>::void_pointer>>
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\list(991,29): message : 컴파일되는 함수 템플릿 인스턴스화 'std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer> *std::list<_Ty,_Alloc>::_Emplace<int&,int&>(std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer> *const ,int &,int &)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=int,
+              _Alloc=std::allocator<int>
+          ]
+C:\source\repos\concurrentTree\ConcurrentTree\ConcurrentTree\ConcurrentTree\230810_concurrenttest.cpp(36,9): message : 컴파일되는 함수 템플릿 인스턴스화 'void std::list<int,std::allocator<int>>::emplace_back<int&,int&>(int &,int &)'에 대한 참조를 확인하세요.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\xutility(1160,19): error C2664: 'bool ThreadFunction2::<lambda_1>::operator ()(const Item &,const Item &) const': 인수 1을(를) '_Value_type'에서 'const Item &'(으)로 변환할 수 없습니다.
+          with
+          [
+              _Value_type=int
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\xutility(1160,20): message : 원인: '_Value_type'에서 'const Item'(으)로 변환할 수 없습니다.
+          with
+          [
+              _Value_type=int
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\xutility(1160,20): message : 소스 형식을 가져올 수 있는 생성자가 없거나 생성자 오버로드 확인이 모호합니다.
+C:\source\repos\concurrentTree\ConcurrentTree\ConcurrentTree\ConcurrentTree\230810_concurrenttest.cpp(38,48): message : 'ThreadFunction2::<lambda_1>::operator ()' 선언을 참조하십시오.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\xutility(1160,19): message : 인수 목록 '(_Value_type, _Value_type)'을(를) 일치시키는 동안
+          with
+          [
+              _Value_type=int
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\list(518,13): message : 컴파일되는 함수 템플릿 인스턴스화 'bool std::_Debug_lt_pred<_Pr2&,_Value_type&,_Value_type&,0>(_Pr,_Ty1,_Ty2) noexcept(<expr>)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Pr2=ThreadFunction2::<lambda_1>,
+              _Value_type=int,
+              _Pr=ThreadFunction2::<lambda_1> &,
+              _Ty1=int &,
+              _Ty2=int &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\list(570,28): message : 컴파일되는 함수 템플릿 인스턴스화 'std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer> *std::_List_val<std::_List_simple_types<_Ty>>::_Merge_same<_Pr2>(std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer> *,std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer> *,std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer> *const ,_Pr2)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=int,
+              _Alloc=std::allocator<int>,
+              _Pr2=ThreadFunction2::<lambda_1>
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\list(1774,21): message : 컴파일되는 함수 템플릿 인스턴스화 'std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer> *std::_List_val<std::_List_simple_types<_Ty>>::_Sort<_Fn>(std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer> *&,const unsigned __int64,_Pr2)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=int,
+              _Alloc=std::allocator<int>,
+              _Fn=ThreadFunction2::<lambda_1>,
+              _Pr2=ThreadFunction2::<lambda_1>
+          ]
+C:\source\repos\concurrentTree\ConcurrentTree\ConcurrentTree\ConcurrentTree\230810_concurrenttest.cpp(38,9): message : 컴파일되는 함수 템플릿 인스턴스화 'void std::list<int,std::allocator<int>>::sort<ThreadFunction2::<lambda_1>>(_Pr2)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Pr2=ThreadFunction2::<lambda_1>
+          ]
+C:\source\repos\concurrentTree\ConcurrentTree\ConcurrentTree\ConcurrentTree\230810_concurrenttest.cpp(38,14): message : 'ThreadFunction2'에서 'std::list<int,std::allocator<int>>::sort'에 대한 첫 번째 참조를 확인하세요.

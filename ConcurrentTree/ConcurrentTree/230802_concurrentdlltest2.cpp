@@ -22,7 +22,7 @@ void remove_element(int value) {
     std::unique_lock<std::mutex> loc1(list_mutex);
     cv_insert.wait(loc1, [] { return linked_list.size() > 0; });  //람다 표현식
     linked_list.remove(value);
-    cv_remove.notify_one();
+    cv_remove.notify_one(); // 오버헤드가 큼
 }
 
 void print_list() {
