@@ -1,5 +1,6 @@
 # ConcurrentTree
 KEB-DesignedAI-ConcurrentTeam
+
 - git 활용 관련 영상 주소(mac) : https://youtu.be/Z9dvM7qgN9s
 - git 활용 관련 영상 주소(window 포함 및 상세) : https://www.youtube.com/watch?v=1I3hMwQU6GU&t=1365s
 - git 협업 팁 (Feature Branch Workflow) : https://gmlwjd9405.github.io/2017/10/27/how-to-collaborate-on-GitHub-1.html
