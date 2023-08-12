@@ -5,6 +5,7 @@ KEB-DesignedAI-ConcurrentTeam
 - git 협업 팁 (Feature Branch Workflow) : https://gmlwjd9405.github.io/2017/10/27/how-to-collaborate-on-GitHub-1.html
 - git 브랜치 종류와 사용법 : https://sudo-minz.tistory.com/114
 - git 브랜치의 이해 & git 태그의 이해  :https://velog.io/@sorzzzzy/Code.presso-2주차-1.-실무자가-알려주는-Git-활용한-프로젝트-관리1
+
 ***Concurreny 유튜브 강의 학습방향***
 - C++ 학습 채널 : https://www.youtube.com/@user-pw9fm4gc7e/playlists
 - [ ]  선행학습
