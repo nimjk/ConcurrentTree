@@ -1,18 +1,25 @@
 {
+    //https://code.visualstudio.com/docs/cpp/config-clang-mac
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: g++ 활성 파일 빌드",
-            "command": "/usr/bin/g++",
+            "label": "C/C++: clang++ build active file",
+            "command": "/usr/bin/clang++",
+            //The command setting specifies the program to run. 
+            //In this case, "clang++" is the driver that causes the Clang compiler to expect C++ code 
+            //and link against the C++ standard library.
             "args": [
-                "-fdiagnostics-color=always",
+                "-std=c++17", //추가
+                "-stdlib=libc++", //추가
+                "-fcolor-diagnostics",
+                "-fansi-escape-codes",
                 "-g",
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${workspaceFolder}" //"${fileDirname}"
             },
             "problemMatcher": [
                 "$gcc"
