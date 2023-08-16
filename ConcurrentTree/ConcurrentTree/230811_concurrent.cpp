@@ -13,7 +13,7 @@ struct Item {
 
 	Item(int idx, int val) : index(idx), value(val) {}
 };
-list<int> my_list;
+list<Item> my_list;
 mutex my_mutex;
 
 void ThreadFunction2(int index, int value) { // 자료의 넣는 순서를 명시하면 되지 않을까? 
@@ -21,7 +21,7 @@ void ThreadFunction2(int index, int value) { // 자료의 넣는 순서를 명시하면 되지
 	my_list.emplace_back(index, value);
 	cout << "index : " << index << "and value: " << value << "inserted. " << "\n";
 	my_list.sort([](const Item& A, const Item& B) {
-		return A.index < A.index;
+		return A.index < B.index;
 		});
 }
 int main(void) {
@@ -38,13 +38,13 @@ int main(void) {
 	t10.join();
 	t11.join();
 	t12.join();
-	for (auto it = my_list.front(); it != my_list.back(); it++)
+	for (auto it = my_list.begin(); it != my_list.end(); it++)
 	{
-		cout << it;
+		cout << it->value << '\n';
 	}
 	chrono::duration<double>sec3 = chrono::system_clock::now() - start3;
 
-	cout << sec3.count();
+	cout << sec3.count() << '\n';
 
 
 }
