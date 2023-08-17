@@ -1,4 +1,7 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <windows.h>
 #include <thread>
 #include <mutex>
 #include <atomic>
@@ -130,21 +133,56 @@ int main() {
     DoublyLinkedList dll;
 
     thread thread1([&dll]() {
-        for (int i = 0; i < 250;  i++)
+        for (int i = 0; i < 500; i++)
+        {
             dll.insertNode(i);
+            cout << "1번 스레드 호출" << '\n';
+        }
         });
     thread thread2([&dll]() {
         for (int i = 250; i < 500; i++)
+        {
             dll.insertNode(i);
+            cout << "2번 스레드 호출" << '\n';
+        }
         });
     thread thread3([&dll]() {
         for (int i = 500; i < 750; i++)
+        {
             dll.insertNode(i);
+            cout << "3번 스레드 호출" << '\n';
+        }
+
         });
     thread thread4([&dll]() {
         for (int i = 200; i < 450; i++)
+        {
             dll.deleteNode(i);
+            cout << "4번 스레드 호출" << '\n';
+        }
         });
+
+    int arr[2000];
+
+    srand(GetTickCount());
+
+    int count = 0;
+
+    while (count < 2000) {
+        int tmp = rand() % 5000 + 1;
+        int isSame = 0;
+        for (int i = 0; i < 2000; i++) {
+            if (tmp == arr[i]) {
+                isSame = 1;
+                break;
+            }
+        }
+        if (isSame == 0) {
+            arr[count] = tmp;
+            dll.insertNode(arr[count]);
+            count++;
+        }
+    }
 
     thread1.join();
     thread2.join();
