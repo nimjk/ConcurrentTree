@@ -1,0 +1,7 @@
+1. srand(GetTickCount()) 사용 오류
+
+2. 에러 : -Wvexing-parse warning
+https://www.mail-archive.com/gcc-patches@gcc.gnu.org/msg247005.html
+
+3. 에러 : 시간표시가 double 자료형보다 커서 잘리는 에러   
+cout << "minimum time of search : " << fixed << mintime << "초\n";
