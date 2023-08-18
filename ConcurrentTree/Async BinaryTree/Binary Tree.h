@@ -25,6 +25,7 @@ public:
 
 class BST // BST 클래스
 {
+
 public:
     TreeNode *root; // 루트 노드를 생성
     BST()

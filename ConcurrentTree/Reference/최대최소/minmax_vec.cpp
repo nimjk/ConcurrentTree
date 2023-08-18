@@ -1,3 +1,4 @@
+// https://velog.io/@ryusuz/C-벡터-요소-중-최대값최소값-구하기-algorithm-헤더
 /* 최소값
 #include <algorithm>
 #include <vector>

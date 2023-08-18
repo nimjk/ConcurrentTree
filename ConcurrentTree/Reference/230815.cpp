@@ -8,21 +8,23 @@
 
 using namespace std;
 
-int CAS(int old_val, int new_val, int* address) {
+int CAS(int old_val, int new_val, int *address)
+{
     int value = *address;
     if (value == old_val)
         *address = new_val;
     return value;
 };
 
-class Node {
+class Node
+{
 public:
     int index;
     int data;
-    Node* prev;
-    Node* next;
+    Node *prev;
+    Node *next;
     bool mark;
-    mutex mtx; // ¹ÂÅØ½º·Î ³ëµå¸¦ º¸È£ÇÔ.
+    mutex mtx; // ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½ï¿½å¸¦ ï¿½ï¿½È£ï¿½ï¿½.
     Node(int num, int value) : index(num = 0), data(value), prev(nullptr), next(nullptr), mark(false) {}
 };
 
@@ -41,70 +43,78 @@ public:
     }
 }*/
 
-class DoublyLinkedList {
+class DoublyLinkedList
+{
 private:
-    Node* head;
-    Node* tail;
+    Node *head;
+    Node *tail;
     mutex listMtx;
     condition_variable cv;
 
 public:
     DoublyLinkedList() : head(nullptr), tail(nullptr) {}
 
-    // ³ëµå »ðÀÔ ÇÔ¼ö
-    void insertNode(int value) {
+    // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
+    void insertNode(int value)
+    {
         int indexNum;
         if (tail->index == 0)
             indexNum = 0;
         else
-            indexNum = tail->index) + 1;
-        
-        
-        Node* newNode = new Node(indexNum, value);
-      
+            indexNum = (tail->index) + 1;
 
-        //±¸»óÁß
+        Node *newNode = new Node(indexNum, value);
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         unique_lock<mutex> lock(listMtx);
-        while (tail && tail->mark) {
-            cv.wait(lock, [this]() { return !tail->mark; });
+        while (tail && tail->mark)
+        {
+            cv.wait(lock, [this]()
+                    { return !tail->mark; });
         }
 
-        if (!head) {
+        if (!head)
+        {
             head = newNode;
             tail = newNode;
         }
-        else {
+        else
+        {
             newNode->prev = tail;
             tail->next = newNode;
             tail = newNode;
         }
-        cv.notify_all();  // Notify other threads waiting on the condition variable
+        cv.notify_all(); // Notify other threads waiting on the condition variable
     }
 
-
-
-
-    // ³ëµå »èÁ¦ ÇÔ¼ö
-    void deleteNode(int value) {
+    // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
+    void deleteNode(int value)
+    {
         {
             std::unique_lock<std::mutex> lock(listMtx);
-            while (tail && tail->mark) {
-                cv.wait(lock, [this]() { return !tail->mark; });
+            while (tail && tail->mark)
+            {
+                cv.wait(lock, [this]()
+                        { return !tail->mark; });
             }
-            Node* current = head;
-            while (current) {
-                if (current->data == value) {
-                    if (current == head) {
+            Node *current = head;
+            while (current)
+            {
+                if (current->data == value)
+                {
+                    if (current == head)
+                    {
                         head = head->next;
                         if (head)
                             head->prev = nullptr;
                     }
-                    else if (current == tail) {
+                    else if (current == tail)
+                    {
                         tail = tail->prev;
                         if (tail)
                             tail->next = nullptr;
                     }
-                    else {
+                    else
+                    {
                         current->prev->next = current->next;
                         current->next->prev = current->prev;
                     }
@@ -115,47 +125,48 @@ public:
             }
         }
 
-        cv.notify_all();  // Notify other threads waiting on the condition variable
+        cv.notify_all(); // Notify other threads waiting on the condition variable
     }
-    // ¸®½ºÆ® Ãâ·Â ÇÔ¼ö
-    void displayList() {
-        Node* current = head;
-        while (current) {
+    // ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
+    void displayList()
+    {
+        Node *current = head;
+        while (current)
+        {
             std::cout << current->data << " ";
             current = current->next;
         }
         std::cout << std::endl;
     }
 
-    // ¼Ò¸êÀÚ
-    ~DoublyLinkedList() {
-        Node* current = head;
-        while (current) {
-            Node* temp = current;
+    // ï¿½Ò¸ï¿½ï¿½ï¿½
+    ~DoublyLinkedList()
+    {
+        Node *current = head;
+        while (current)
+        {
+            Node *temp = current;
             current = current->next;
             delete temp;
         }
     }
 };
 
-int main() {
-    //³­¼ö ¹ß»ý
+int main()
+{
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½
     random_device rd;
     mt19937 gen(rd());
     DoublyLinkedList dll;
 
-    thread thread1([&dll]() {
-        dll.insertNode(1);
-        });
-    thread thread2([&dll]() {
-        dll.insertNode(2);
-        });
-    thread thread3([&dll]() {
-        dll.insertNode(3);
-        });
-    thread thread4([&dll]() {
-        dll.deleteNode(1);
-        });
+    thread thread1([&dll]()
+                   { dll.insertNode(1); });
+    thread thread2([&dll]()
+                   { dll.insertNode(2); });
+    thread thread3([&dll]()
+                   { dll.insertNode(3); });
+    thread thread4([&dll]()
+                   { dll.deleteNode(1); });
 
     thread1.join();
     thread2.join();

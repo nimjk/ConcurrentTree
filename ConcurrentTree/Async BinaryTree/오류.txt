@@ -1,0 +1,7 @@
+1. 에러 : [1]    74793 segmentation fault  
+--> https://adnoctum.tistory.com/387
+    명시적으로 사용된 포인터가 아니라 내부적으로 구현된 포인터를 사용할 경우 에러가 발생한다. 
+    std::vector<int> a; 
+    a.push_back(1); 
+    int sum = std::accumulate(a.begin(), a.begin() + 5, 0); // 여기서 에러 발생.
+    위와 같이 a의 begin 위치에서 5 번째 요소까지의 위치값(이 값이 포인터인데)까지 값을 더하고자 할 경우, 아직 5 번째 요소는 할당되지 않았기 때문에 저 경우 에러가 발생한다. 문제는 위에는 pointer 를 사용하는 것처럼 보이는 곳이 없다는 것. 물론 내부에서 accumulate 가 어떻게 작동하는지 안다면 쉽게 찾아낼 수 있지만 그렇지 않을 경우 조금 혼동될 수도 있다. 
