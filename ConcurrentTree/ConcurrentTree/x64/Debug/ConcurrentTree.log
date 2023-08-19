@@ -1,3 +1,4 @@
-﻿  230818_array_template.cpp
-C:\source\repos\concurrentTree\ConcurrentTree\ConcurrentTree\ConcurrentTree\230818_array_template.cpp(134,25): warning C4244: '인수': 'ULONGLONG'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  230819_list_concurrent.cpp
+C:\source\repos\concurrentTree\ConcurrentTree\ConcurrentTree\ConcurrentTree\230819_list_concurrent.cpp(14,25): warning C4244: '인수': 'ULONGLONG'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\source\repos\concurrentTree\ConcurrentTree\ConcurrentTree\ConcurrentTree\230819_list_concurrent.cpp(15,9): warning C4101: 'arr' :참조되지 않은 지역 변수입니다.
   ConcurrentTree.vcxproj -> C:\source\repos\concurrentTree\ConcurrentTree\ConcurrentTree\x64\Debug\ConcurrentTree.exe

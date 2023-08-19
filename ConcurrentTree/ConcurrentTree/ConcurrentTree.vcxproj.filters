@@ -57,7 +57,13 @@
     <ClCompile Include="230818_array_lockfree.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="final.cpp">
+    <ClCompile Include="230819_array-insertdelete.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="230819_list_concurrent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="230819_list_singlethread.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -66,6 +72,9 @@
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\..\Users\user\Downloads\SpinLock.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Users\user\Desktop\double_linked_list\list_final.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
