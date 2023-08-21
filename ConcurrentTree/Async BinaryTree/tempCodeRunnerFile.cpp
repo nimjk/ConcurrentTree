@@ -149,6 +149,11 @@ int main()
     //         mtx.lock();
     //         if (new_node != NULL) {
     //             obj.deleteNode(obj.root, new_node);
+    // TreeNode *new_node = new TreeNode();
+    // thread thread1(
+    //     {new_node = obj.iterativeSearch(arr[searchidx]);
+    //         if (new_node != NULL) {
+    //             obj.deleteNode(obj.root, arr[searchidx]);
     //             cout << "Value Deleted" << endl;
     //         }
     //         else {
@@ -169,9 +174,12 @@ int main()
     //  {
     //      dll.deleteNode(1);
 
-    // thread2.join();
+    // thread2.join();s
     // thread3.join();
     // thread4.join();
 
     return 0;
 }
+//         } });
+
+//         TreeNode *new_node = new TreeNode();
