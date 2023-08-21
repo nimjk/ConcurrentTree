@@ -1,25 +1,21 @@
-﻿// BST.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
-//
-
-#include <iostream>
+#pragma once
 #define SPACE 10
-
 using namespace std;
 
-class TreeNode
+class TreeNode // 트리노드 클래스
 {
 public:
-    int value;
-    TreeNode *left;
-    TreeNode *right;
+    int value;       // 노드값
+    TreeNode *left;  // 왼쪽 가리키는 포인터
+    TreeNode *right; // 오른쪽 가리키는 포인터
 
-    TreeNode()
+    TreeNode() // 아무 값도 가지지 않음
     {
         value = 0;
         left = NULL;
         right = NULL;
     }
-    TreeNode(int v)
+    TreeNode(int v) // 값이 들어오면 정수로 값을 받음
     {
         value = v;
         left = NULL;
@@ -27,54 +23,58 @@ public:
     }
 };
 
-class BST
+class BST // BST 클래스
 {
+
 public:
-    TreeNode *root;
+    TreeNode *root; // 루트 노드를 생성
     BST()
     {
-        root = NULL;
+        root = NULL; // 루트는 아무 값을 가지지 않음
     }
-    bool isTreeEmpty()
+    bool isTreeEmpty() // 멤버 함수 루트가 비어있는지 확인
     {
-        if (root == NULL)
+        if (root == NULL) // 루트가 비어있으면 TRUE를 반환
         {
             return true;
         }
         else
         {
-            return false;
+            return false; // 루트가 비어있지 있지 않으면 false를 반환
         }
     }
 
-    void insertNode(TreeNode *new_node)
+    void insertNode(TreeNode *new_node) // 삽입노드 멤버함수 , 새로운 객체노드 포인터를 받음
     {
-        if (root == NULL)
+        if (root == NULL) // 루트 노드가 비어있으면 , 루트에 받은 노드의 값을 넣음
         {
             root = new_node;
             cout << "Value Inserted as root node!" << endl;
         }
-        else
+        else // 루트 노드가 비어있지 않으면, 임시 객체를 가리키는 temp 포인터를 만들어서 루트 노드 값을 임시로 넣어둠.
         {
             TreeNode *temp = root;
-            while (temp != NULL)
+            while (temp != NULL) // temp 값을 반환할 때까지 계속 반복
             {
-                if (new_node->value == temp->value)
+                if (new_node->value == temp->value) // 새로받은 노드값이 본래 루트노드값이랑 같으면 안 받음.
                 {
                     cout << "Value Already exist,"
                          << "Insert another value!" << endl;
                     return;
                 }
+                // 새 노드값이 루트노드값보다 작고 왼쪽자식이 없으면 왼쪽자식에 삽입
                 else if ((new_node->value < temp->value) && (temp->left == NULL))
                 {
                     temp->left = new_node;
                     cout << "Value Inserted to the left!" << endl;
                     break;
                 }
+                // 새 노드값이 루트 노드값보다 작기만 하다면
                 else if (new_node->value < temp->value)
-                {
+                { // 원래 왼쪽자식을 받음
                     temp = temp->left;
                 }
+                // 새 노드값이 루트노드값보다 크고 오른쪽 자식이 없으면 오른쪽 자식에 삽입
                 else if ((new_node->value > temp->value) && (temp->right == NULL))
                 {
                     temp->right = new_node;
@@ -88,6 +88,7 @@ public:
             }
         }
     }
+    //
     TreeNode *insertRecursive(TreeNode *r, TreeNode *new_node)
     {
         if (r == NULL)
@@ -269,18 +270,14 @@ public:
         {
             r->right = deleteNode(r->right, v);
         }
-        // 이제는 val값이 루트와 같은 경우
-        //  if key is same as root's key, then This is the node to be deleted
+        // if key is same as root's key, then This is the node to be deleted
         else
         {
             // node with only one child or no child
             if (r->left == NULL)
             {
                 TreeNode *temp = r->right;
-                // 왼쪽에 자식이 없는 경우, 오른쪽 값은 임시로 넣어두고
-                // 루트키는 지우고
                 delete r;
-                // 루트키에 오른쪽 값을 넣는다.
                 return temp;
             }
             else if (r->right == NULL)
@@ -291,9 +288,8 @@ public:
             }
             else
             {
-                // 노드가 두개의 자식이 있는 경우
-                //  node with two children: Get the inorder successor (smallest
-                //  in the right subtree)
+                // node with two children: Get the inorder successor (smallest
+                // in the right subtree)
                 TreeNode *temp = minValueNode(r->right);
                 // Copy the inorder successor's content to this node
                 r->value = temp->value;
@@ -305,111 +301,3 @@ public:
         return r;
     }
 };
-
-int main()
-{
-    BST obj;
-    int option, val;
-
-    do
-    {
-        cout << "What operation do you want to perform? "
-             << " Select Option number. Enter 0 to exit." << endl;
-        cout << "1. Insert Node" << endl;
-        cout << "2. Search Node" << endl;
-        cout << "3. Delete Node" << endl;
-        cout << "4. Print/Traversal BST values" << endl;
-        cout << "5. Height of Tree" << endl;
-        cout << "6. Clear Screen" << endl;
-        cout << "0. Exit Program" << endl;
-
-        cin >> option;
-        // Node n1;
-        TreeNode *new_node = new TreeNode();
-
-        switch (option)
-        {
-        case 0:
-            break;
-        case 1:
-            cout << "INSERT" << endl;
-            cout << "Enter VALUE of TREE NODE to INSERT in BST: ";
-            cin >> val;
-            new_node->value = val;
-            obj.root = obj.insertRecursive(obj.root, new_node);
-            // obj.insertNode(new_node);
-            cout << endl;
-            break;
-
-        case 2:
-            cout << "SEARCH" << endl;
-            cout << "Enter VALUE of TREE NODE to SEARCH in BST: ";
-            cin >> val;
-            // new_node = obj.iterativeSearch(val);
-            new_node = obj.recursiveSearch(obj.root, val);
-            if (new_node != NULL)
-            {
-                cout << "Value found" << endl;
-            }
-            else
-            {
-                cout << "Value NOT found" << endl;
-            }
-            break;
-        case 3:
-            cout << "DELETE" << endl;
-            cout << "Enter VALUE of TREE NODE to DELETE in BST: ";
-            cin >> val;
-            new_node = obj.iterativeSearch(val);
-            if (new_node != NULL)
-            {
-                obj.deleteNode(obj.root, val);
-                cout << "Value Deleted" << endl;
-            }
-            else
-            {
-                cout << "Value NOT found" << endl;
-            }
-            break;
-        case 4:
-            cout << "PRINT 2D: " << endl;
-            obj.print2D(obj.root, 5);
-            cout << endl;
-            cout << "Print Level Order BFS: \n";
-            obj.printLevelOrderBFS(obj.root);
-            cout << endl;
-            //	      cout <<"PRE-ORDER: ";
-            //	      obj.printPreorder(obj.root);
-            //	      cout<<endl;
-            //	      cout <<"IN-ORDER: ";
-            //	      obj.printInorder(obj.root);
-            //	      cout<<endl;
-            //	      cout <<"POST-ORDER: ";
-            //	      obj.printPostorder(obj.root);
-            break;
-        case 5:
-            cout << "TREE HEIGHT" << endl;
-            cout << "Height : " << obj.height(obj.root) << endl;
-            break;
-        case 6:
-            system("cls");
-            break;
-        default:
-            cout << "Enter Proper Option number " << endl;
-        }
-
-    } while (option != 0);
-
-    return 0;
-}
-
-// 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
-// 프로그램 디버그: <F5> 키 또는 [디버그] > [디버깅 시작] 메뉴
-
-// 시작을 위한 팁:
-//   1. [솔루션 탐색기] 창을 사용하여 파일을 추가/관리합니다.
-//   2. [팀 탐색기] 창을 사용하여 소스 제어에 연결합니다.
-//   3. [출력] 창을 사용하여 빌드 출력 및 기타 메시지를 확인합니다.
-//   4. [오류 목록] 창을 사용하여 오류를 봅니다.
-//   5. [프로젝트] > [새 항목 추가]로 이동하여 새 코드 파일을 만들거나, [프로젝트] > [기존 항목 추가]로 이동하여 기존 코드 파일을 프로젝트에 추가합니다.
-//   6. 나중에 이 프로젝트를 다시 열려면 [파일] > [열기] > [프로젝트]로 이동하고 .sln 파일을 선택합니다.

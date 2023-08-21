@@ -6,12 +6,15 @@
 #include <time.h>
 #include <mutex>
 using namespace std;
+/*
+스레드까지 생성
+*/
 
 // arry->vec
 // voidInsertValueTest.cpp
 
 // voidserchValuesTest.cpp
-void searchValues(BST &obj, const int arr[])
+void searchValues(BST &obj, const vector<int> arr)
 {
 
     for (int i = 0; i < 500; i++) // 찾는 개수
@@ -29,14 +32,43 @@ void searchValues(BST &obj, const int arr[])
         }
     }
 }
+
+void insertValues(BST &obj, TreeNode *new_node, const vector<int> &arr)
+{
+    for (int i = 0; i < arr.size(); i++)
+    {
+        TreeNode *new_node = new TreeNode();
+        new_node->value = arr[i];
+        obj.insertRecursive(obj.root, new_node);
+    }
+}
+
+void deleteValues(BST &obj, TreeNode *new_node, const vector<int> &arr)
+{
+    int val;
+    for (int i = 0; i < arr.size(); i++)
+    {
+        TreeNode *new_node = obj.iterativeSearch(val);
+        new_node = obj.iterativeSearch(val);
+        if (new_node != NULL)
+        {
+            obj.deleteNode(obj.root, val);
+            cout << "Value Deleted" << endl;
+        }
+        else
+        {
+            cout << "Value NOT found" << endl;
+        }
+    }
+}
 //
 int main()
 {
     BST obj;
     int option, val;
     // arr->vec
-    // vector<int> arr;
-    int arr[2000];
+    vector<int> arr;
+    // int arr[2000];
 
     srand((unsigned int)time(NULL));
     //  cout << "from clock_gettime" << tp << endl;
@@ -50,7 +82,7 @@ int main()
         int tmp = rand() % 5000 + 1;
         int isSame = 0;
 
-        for (int i = 0; i < 2000; i++)
+        for (int i = 0; i < arr.size(); i++) // vector 변경지점
         {
             if (tmp == arr[i]) // 삽입 값 중복확인
             {
@@ -60,7 +92,7 @@ int main()
         }
         if (isSame == 0)
         {
-            arr[count] = tmp;
+            arr.push_back(tmp); // vector 변경지점
             count++;
         }
     }
@@ -123,6 +155,44 @@ int main()
     cout << "maximum time of search : " << maxtime << "초\n";
     cout << "total time of search : " << totaltime << "초\n";
     cout << "average time of search : " << meantime << "초\n";
+
+    thread thread1([&obj]()
+                   {
+                       for (int i = 500; i < 1000; i++)
+                       {
+                           deleteValues(obj.root, i);
+                           cout << "thread 1: " << '\n';
+                       } });
+    thread thread2([&obj]()
+                   {
+                       for (int i = 1000; i < 1500; i++)
+                       {
+                           insertValues(obj.root, i);
+                           cout << "thread 2: " << '\n';
+                       } });
+
+    thread thread2([&obj]()
+                   {
+                       for (int i = 1500; i < 2000; i++)
+                       {
+                           deleteValues(obj.root, i);
+                           cout << "thread 3: " << '\n';
+                       } });
+    thread thread2([&obj]()
+                   {
+                       for (int i = 2000; i < 2500; i++)
+                       {
+                           deleteValues(obj.root, i);
+                           cout << "thread 3: " << '\n';
+                       } });
+
+    thread1.join();
+    thread2.join();
+    thread3.join();
+    thread4.join();
+    cout << "Binary Tree: " << end;
+    obj.print2D(obj.root, 3);
+
     //
     // mutex mtx;
     // thread thread1([&obj]()

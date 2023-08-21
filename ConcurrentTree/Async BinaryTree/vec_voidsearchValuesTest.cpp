@@ -11,7 +11,7 @@ using namespace std;
 // voidInsertValueTest.cpp
 
 // voidserchValuesTest.cpp
-void searchValues(BST &obj, const int arr[])
+void searchValues(BST &obj, const vector<int> arr)
 {
 
     for (int i = 0; i < 500; i++) // 찾는 개수
@@ -35,8 +35,8 @@ int main()
     BST obj;
     int option, val;
     // arr->vec
-    // vector<int> arr;
-    int arr[2000];
+    vector<int> arr;
+    // int arr[2000];
 
     srand((unsigned int)time(NULL));
     //  cout << "from clock_gettime" << tp << endl;
@@ -50,7 +50,7 @@ int main()
         int tmp = rand() % 5000 + 1;
         int isSame = 0;
 
-        for (int i = 0; i < 2000; i++)
+        for (int i = 0; i < arr.size(); i++) // vector 변경지점
         {
             if (tmp == arr[i]) // 삽입 값 중복확인
             {
@@ -60,7 +60,7 @@ int main()
         }
         if (isSame == 0)
         {
-            arr[count] = tmp;
+            arr.push_back(tmp); // vector 변경지점
             count++;
         }
     }
